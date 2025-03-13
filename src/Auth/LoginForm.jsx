@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useLogin } from "../Api/LoginApi"; 
-import { useNavigate } from "react-router-dom"; 
+import { useLogin } from "../Api/LoginApi";
+import { useNavigate } from "react-router-dom";
 import "./Auth.css";
 
 export default function LoginForm() {
@@ -9,21 +9,26 @@ export default function LoginForm() {
   const [error, setError] = useState(null);
 
   const { mutate, isLoading, isError, error: mutationError } = useLogin();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize useNavigate
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     mutate({ email, password }, {
       onSuccess: (data) => {
         console.log("Logged in successfully:", data);
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("token", data.token); // Store token
+
+        // Redirect to profile page after successful login
+        navigate("/profile"); // Redirects to /profile page
       },
       onError: (err) => {
-        setError(err.message);
+        setError(err.message); // Set error message if login fails
       },
     });
   };
 
+  // Redirect to the Register page when the Register button is clicked
   const handleRegisterClick = () => {
     navigate("/register");
   };
@@ -59,11 +64,11 @@ export default function LoginForm() {
                     id="password"
                     placeholder="Enter your password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)} 
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
 
-                <div className="submit-button">
+                <div className="submit-button flex ">
                   <button type="submit" disabled={isLoading}>
                     {isLoading ? "Logging in..." : "Log in"}
                   </button>
