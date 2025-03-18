@@ -1,53 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { useUserProfile, useUpdateUserProfile } from "../Api/profilePageApi"; // Import the API hooks
-import "./profile.css"; // Import the separate CSS file
+import React, { useState, useEffect } from 'react';
+import { useUserProfile, useUpdateUserProfile } from '../Api/profile-api';
+import UploadPicture from '../upload-picture/upload-picture'; 
+import './profile.css';
 
-export default function ProfilePage() {
-  const { data: userProfile, isLoading, isError } = useUserProfile(); // Fetch user profile data
-  const updateUserProfileMutation = useUpdateUserProfile(); // Mutation for updating profile
+export default function Profile() {
+  const { data: userProfile, isLoading, isError } = useUserProfile();
+  const updateUserProfileMutation = useUpdateUserProfile();
 
   const [user, setUser] = useState({
-    email: "",
-    password: "********",
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    address: "",
-    city: "",
-    state: "",
-    postalCode: "",
-    country: "",
-    dateOfBirth: "",
-    gender: "",
-    nationality: "",
-    profilePictureUrl: "",
-    preferredContactMethod: "",
-    maritalStatus: "",
+    email: '',
+    password: '********',
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    address: '',
+    city: '',
+    state: '',
+    postalCode: '',
+    country: '',
+    dateOfBirth: '',
+    gender: '',
+    nationality: '',
+    profilePictureUrl: '',
+    preferredContactMethod: '',
+    maritalStatus: '',
   });
-
-  const [profilePicture, setProfilePicture] = useState(null);
-  const [resume, setResume] = useState(null);
 
   // Populate the user state when the profile data is fetched
   useEffect(() => {
     if (userProfile) {
       setUser({
-        email: userProfile.email,
-        password: "********",
-        firstName: userProfile.firstName,
-        lastName: userProfile.lastName,
-        phoneNumber: userProfile.phoneNumber,
-        address: userProfile.address,
-        city: userProfile.city,
-        state: userProfile.state,
-        postalCode: userProfile.postalCode,
-        country: userProfile.country,
-        dateOfBirth: userProfile.dateOfBirth,
-        gender: userProfile.gender,
-        nationality: userProfile.nationality,
-        profilePictureUrl: userProfile.profilePictureUrl,
-        preferredContactMethod: userProfile.preferredContactMethod,
-        maritalStatus: userProfile.maritalStatus,
+        ...userProfile,
+        password: '********', // Mask the password
       });
     }
   }, [userProfile]);
@@ -57,30 +41,31 @@ export default function ProfilePage() {
     setUser({ ...user, [name]: value });
   };
 
-  const handleProfilePictureUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setProfilePicture(file);
-    }
-  };
-
-  const handleResumeUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setResume(file);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Call the mutation to update the user profile
       await updateUserProfileMutation.mutateAsync(user);
-      alert("Profile updated successfully!");
+      alert('Profile updated successfully!');
     } catch (error) {
-      console.error("Error updating profile:", error);
-      alert("Failed to update profile.");
+      console.error('Error updating profile:', error);
+      alert('Failed to update profile.');
     }
+  };
+
+  // Handle successful file upload
+  const handleUploadSuccess = (response) => {
+    alert('File uploaded successfully!');
+    console.log('Upload response:', response);
+    // Update the user state with the new file URL if needed
+    if (response.profilePictureUrl) {
+      setUser({ ...user, profilePictureUrl: response.profilePictureUrl });
+    }
+  };
+
+  // Handle file upload error
+  const handleUploadError = (error) => {
+    console.error('Error uploading file:', error);
+    alert('Failed to upload file.');
   };
 
   if (isLoading) {
@@ -248,25 +233,25 @@ export default function ProfilePage() {
           {/* Profile Picture Upload */}
           <div className="profile-section-group">
             <h2>Profile Picture</h2>
-            <div className="input-group">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleProfilePictureUpload}
-              />
-            </div>
+            <UploadPicture
+              label="Upload Profile Picture"
+              endpoint="upload-picture"
+              email={user.email}
+              onUploadSuccess={handleUploadSuccess}
+              onUploadError={handleUploadError}
+            />
           </div>
 
           {/* Resume Upload */}
           <div className="profile-section-group">
             <h2>Resume</h2>
-            <div className="input-group">
-              <input
-                type="file"
-                accept=".pdf,.doc,.docx"
-                onChange={handleResumeUpload}
-              />
-            </div>
+            <UploadPicture
+              label="Upload Resume"
+              endpoint="upload-resume"
+              email={user.email}
+              onUploadSuccess={handleUploadSuccess}
+              onUploadError={handleUploadError}
+            />
           </div>
 
           {/* Submit Button */}

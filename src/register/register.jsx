@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useRegister } from "../Api/RegisterApi";
+import { useRegister } from "../Api/register-api";
 import { useNavigate } from "react-router-dom";
-import "./Auth.css";
+import "./register.css";
 
-export default function RegisterForm() {
+export default function Register() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",

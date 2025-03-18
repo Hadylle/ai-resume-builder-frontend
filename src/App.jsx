@@ -1,16 +1,16 @@
 import { Routes, Route } from 'react-router-dom';
-import LoginForm from './Auth/LoginForm';
-import RegisterForm from './Auth/RegisterForm';
-import ProfilePage from './Profile/ProfilePage';
+import Login from './login/login';
+import Register from './register/register';
+import Profile from './Profile/profile';
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<LoginForm />} />
-        <Route path="/login" element={<LoginForm />} />
-        <Route path='/register' element={<RegisterForm />} />
-        <Route path='profile' element={<ProfilePage />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='profile' element={<Profile />} />
       </Routes>
     </div>
   );

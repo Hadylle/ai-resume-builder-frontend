@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useLogin } from "../Api/LoginApi";
+import { useLogin } from "../Api/login-api";
 import { useNavigate } from "react-router-dom";
-import "./Auth.css";
+import "./login.css";
 
-export default function LoginForm() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
