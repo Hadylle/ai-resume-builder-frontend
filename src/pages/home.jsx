@@ -12,7 +12,7 @@ import FAQ from '../components/Home/faq';
 const Home = () => {
   return (
     <div className="bg-white text-gray-900">
-      <Navbar />  
+       
       <HeroSection />
       <TemplatesSection />
       <CVPreview />

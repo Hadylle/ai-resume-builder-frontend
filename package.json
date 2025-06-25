@@ -12,6 +12,7 @@
   "dependencies": {
     "@headlessui/react": "^2.2.4",
     "@heroicons/react": "^2.2.0",
+    "@lottiefiles/dotlottie-react": "^0.14.2",
     "@react-pdf/renderer": "^4.3.0",
     "compromise": "^14.14.4",
     "framer-motion": "^12.18.1",
@@ -21,7 +22,9 @@
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.58.1",
     "react-router-dom": "^7.6.2",
-    "react-to-pdf": "^2.0.1"
+    "react-to-pdf": "^2.0.1",
+    "use-debounce": "^10.0.5",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

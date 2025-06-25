@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 const HeroSection = () => {
   return (
-    <div className="bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white py-20 w-full mx-0 px-4">
+    <div className="bg-gradient-to-r from-[#3B82F6] via-[#6D28D9] to-[#8B5CF6] text-white py-20 w-full mx-0 px-4">
       <div className="max-w-full mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
