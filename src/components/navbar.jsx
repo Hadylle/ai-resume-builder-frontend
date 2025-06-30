@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 
 // Route-to-color mapping
 const routeColors = {
-  '/analyze': '#6d36d4',     // cv-feedback
-  '/improve': '#760617',     // cv-improve
+  '/analyze': '#0091e3',     // cv-feedback
+  '/improve': '#0091e3',     // cv-improve
   '/match': '#0091e3',       // cv-matching
-  '/tailor': '#1b4977',      // cv-tailoring
-  '/build': '#0b5e68',
-  '/export': '#5f1b73',
-  '/storage': '#353535',
+  '/tailor': '#0091e3',      // cv-tailoring
+  '/build': '#0091e3',
+  '/feedback': '#0091e3',
+  '/storage': '#0091e3',
   '/login': '#3B82F6',
   '/': '#0091e3'
 };
@@ -50,8 +50,8 @@ const Navbar = () => {
             <Link to="/improve" className="hover:text-[#F3F4F6] transition-colors px-2 py-1">Improve</Link>
             <Link to="/tailor" className="hover:text-[#F3F4F6] transition-colors px-2 py-1">Tailor</Link>
             <Link to="/build" className="hover:text-[#F3F4F6] transition-colors px-2 py-1">Build CV</Link>
-            <Link to="/export" className="hover:text-[#F3F4F6] transition-colors px-2 py-1">Export PDF</Link>
             <Link to="/storage" className="hover:text-[#F3F4F6] transition-colors px-2 py-1">Storage</Link>
+            <Link to="/feedback" className="hover:text-[#F3F4F6] transition-colors px-2 py-1">Feedback</Link>
           </div>
 
           {/* Auth + CTA */}

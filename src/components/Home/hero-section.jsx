@@ -1,6 +1,13 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const navigate = useNavigate(); // ✅ Must be inside the component
+
+  const handleNavigation = () => {
+    navigate("/build-resume"); // ✅ Navigates on button click
+  };
+
   return (
     <div className="bg-gradient-to-r from-[#3B82F6] via-[#6D28D9] to-[#8B5CF6] text-white py-20 w-full mx-0 px-4">
       <div className="max-w-full mx-auto">
@@ -21,6 +28,7 @@ const HeroSection = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-[#10B981] text-white hover:bg-[#0ea271] px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition-all"
+              onClick={handleNavigation}
             >
               Build My Resume
             </motion.button>
@@ -48,6 +56,6 @@ const HeroSection = () => {
       </div>
     </div>
   );
-}; 
+};
 
 export default HeroSection;

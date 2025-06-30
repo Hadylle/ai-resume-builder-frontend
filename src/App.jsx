@@ -9,11 +9,13 @@ import CvMatchingPage from './pages/cv-matching';
 import CvTailoringPage from './pages/cv-tailoring';
 import CvFeedbackPage from './pages/cv-feedback';
 import CvImprovePage from './pages/cv-improve';
+import ProgressBarOverlay from './components/ProgressBarOverlay';
 
 function App() {
   return (
     <Router>
       <Navbar />
+      <ProgressBarOverlay />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<SignInSignUpPage />} />
@@ -21,6 +23,8 @@ function App() {
         <Route path="/match" element={<CvMatchingPage />} />
         <Route path="/tailor" element={<CvTailoringPage />} />
         <Route path="/improve" element={<CvImprovePage />} />
+        <Route path="/feedback" element={<CvFeedbackPage />} />
+        <Route path='/build-resume' element={<BuildResume />} />
       </Routes>
       <Footer />
     </Router>
