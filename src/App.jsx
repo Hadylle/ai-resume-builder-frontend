@@ -10,6 +10,7 @@ import CvTailoringPage from './pages/cv-tailoring';
 import CvFeedbackPage from './pages/cv-feedback';
 import CvImprovePage from './pages/cv-improve';
 import ProgressBarOverlay from './components/ProgressBarOverlay';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/improve" element={<CvImprovePage />} />
         <Route path="/feedback" element={<CvFeedbackPage />} />
         <Route path='/build-resume' element={<BuildResume />} />
+        <Route path='/profile' element={<ProfilePage />} />
       </Routes>
       <Footer />
     </Router>

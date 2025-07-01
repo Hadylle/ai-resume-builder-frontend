@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { UserCircleIcon } from '@heroicons/react/24/solid'; // 👈 import Heroicon
 
-// Route-to-color mapping
 const routeColors = {
-  '/analyze': '#0091e3',     // cv-feedback
-  '/improve': '#0091e3',     // cv-improve
-  '/match': '#0091e3',       // cv-matching
-  '/tailor': '#0091e3',      // cv-tailoring
+  '/analyze': '#0091e3',
+  '/improve': '#0091e3',
+  '/match': '#0091e3',
+  '/tailor': '#0091e3',
   '/build': '#0091e3',
   '/feedback': '#0091e3',
   '/storage': '#0091e3',
@@ -20,7 +20,6 @@ const Navbar = () => {
   const [bgColor, setBgColor] = useState(routeColors['/']);
 
   useEffect(() => {
-    // Match exact route or fallback to default
     setBgColor(routeColors[location.pathname] || '#3B82F6');
   }, [location.pathname]);
 
@@ -54,18 +53,23 @@ const Navbar = () => {
             <Link to="/feedback" className="hover:text-[#F3F4F6] transition-colors px-2 py-1">Feedback</Link>
           </div>
 
-          {/* Auth + CTA */}
+          {/* Auth + Profile Icon */}
           <div className="flex items-center space-x-4">
             <Link to="/login" className="text-base font-medium hover:text-[#F3F4F6] transition-colors">
               Sign In
             </Link>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-[#05dbb4] text-white px-5 py-2 rounded-md font-semibold shadow-sm hover:bg-[#05dbb4] transition-colors text-base"
-            >
-              Create Resume
-            </motion.button>
+
+            {/* Profile Icon Button */}
+            <Link to="/profile">
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className="rounded-full p-1 hover:bg-white/20 transition"
+                title="Profile"
+              >
+                <UserCircleIcon className="h-8 w-8 text-white" />
+              </motion.div>
+            </Link>
           </div>
         </div>
       </div>

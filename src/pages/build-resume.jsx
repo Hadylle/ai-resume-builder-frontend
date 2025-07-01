@@ -9,9 +9,13 @@ import EducationForm from '../components/build-resume/education-form';
 import SkillsForm from '../components/build-resume/skills-form';
 import ProjectForm from '../components/build-resume/project-form';
 import CertificationForm from '../components/build-resume/Certification-form';
-import LanguagesInterestsSocialForm from '../components/build-resume/languages-interests-social-form'; // <== import here
+import LanguagesInterestsSocialForm from '../components/build-resume/languages-interests-social-form';
+
 import ResumePreview from '../components/resume/resume-preview';
 import TemplateSelector from '../components/resume/template-selector';
+
+import { useResumeStore } from '../store/resume-store';
+import { saveCvBuild } from '../api/cv-build-api';
 
 const forms = [
   { id: 'personal', label: 'Personal Info', Component: PersonalInfoForm },
@@ -20,7 +24,7 @@ const forms = [
   { id: 'skills', label: 'Skills', Component: SkillsForm },
   { id: 'projects', label: 'Projects', Component: ProjectForm },
   { id: 'certifications', label: 'Certifications', Component: CertificationForm },
-  { id: 'extra', label: 'Languages & Interests', Component: LanguagesInterestsSocialForm } // <== added here
+  { id: 'extra', label: 'Languages & Interests', Component: LanguagesInterestsSocialForm }
 ];
 
 const variants = {
@@ -43,6 +47,7 @@ export default function BuildResume() {
   const [direction, setDirection] = useState(0);
   const [previewMode, setPreviewMode] = useState(false);
 
+  const { resumeData } = useResumeStore();
   const CurrentForm = forms[currentStep].Component;
 
   const nextStep = () => {
@@ -59,12 +64,19 @@ export default function BuildResume() {
     }
   };
 
+  const handleSaveCv = async () => {
+    try {
+      const savedCv = await saveCvBuild(resumeData);
+      alert('CV saved successfully! ✅');
+      console.log('Saved CV:', savedCv);
+    } catch (error) {
+      alert('Failed to save CV ❌');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      
       <main className="mx-auto py-8 px-2 sm:px-4 lg:px-6 w-full max-w-[1400px]">
-      
-
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -129,13 +141,12 @@ export default function BuildResume() {
             className="lg:w-3/5 flex flex-col"
             style={{ minHeight: 0, maxHeight: 'calc(100vh - 136px)', overflow: 'hidden' }}
           >
-            {/* Buttons outside preview container */}
             <div className="bg-white p-4 rounded-t-lg shadow border border-b-0 border-gray-200 flex gap-2 justify-end">
               <button
-                onClick={() => alert('Download PDF functionality goes here')}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                onClick={handleSaveCv}
+                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
               >
-                Download PDF
+                Save CV
               </button>
               <button
                 onClick={() => setPreviewMode((prev) => !prev)}
@@ -149,7 +160,7 @@ export default function BuildResume() {
               </button>
             </div>
 
-            {/* Preview container */}
+            {/* Preview */}
             <div
               className="bg-white rounded-b-lg shadow border border-gray-200 flex-grow overflow-auto p-6"
               style={{ minHeight: 0 }}
@@ -159,8 +170,6 @@ export default function BuildResume() {
           </div>
         </motion.div>
       </main>
-
-      <Footer />
     </div>
   );
 }

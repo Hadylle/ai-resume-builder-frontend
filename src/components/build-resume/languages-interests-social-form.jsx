@@ -1,4 +1,3 @@
-// components/build-resume/languages-interests-social-form.js
 import React, { useState } from 'react';
 import { useResumeStore } from '../../store/resume-store';
 import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline';
@@ -71,7 +70,7 @@ export default function LanguagesInterestsSocialForm() {
   };
 
   return (
-    <>
+    <div className="space-y-6">
       <EditableList
         title="Languages"
         items={resumeData.languages || []}
@@ -105,6 +104,6 @@ export default function LanguagesInterestsSocialForm() {
           )
         }
       />
-    </>
+    </div>
   );
 }
